@@ -1,123 +1,70 @@
-import Link from "next/link";
-import { ArrowRight, Layers, Palette, Zap } from "lucide-react";
+import type { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { siteConfig } from "@/config/site";
+import { StatsCard } from "@/components/dashboard/stats-card";
+import { InternGrid } from "@/components/dashboard/intern-grid";
+import { Users, TrendingUp, Award } from "lucide-react";
+import { mockInterns, getTeamAnalytics } from "@/lib/mock-data";
 
-const features = [
-  {
-    icon: Zap,
-    title: "빠른 개발",
-    description: "Next.js 16 + React 19의 최신 기능으로 빠르게 개발하세요.",
-  },
-  {
-    icon: Palette,
-    title: "아름다운 UI",
-    description: "shadcn/ui + Tailwind CSS로 일관된 디자인 시스템을 제공합니다.",
-  },
-  {
-    icon: Layers,
-    title: "확장 가능",
-    description: "체계적인 컴포넌트 구조로 쉽게 확장할 수 있습니다.",
-  },
-];
+export const metadata: Metadata = {
+  title: "인턴 대시보드 | 멋쟁이사자처럼 역량 성장 리포트",
+  description: "인턴 역량 성장 현황을 한눈에 확인하세요",
+};
 
-export default function HomePage() {
+/**
+ * 메인 대시보드 페이지
+ * 인턴 목록 및 팀 KPI 표시
+ */
+export default function DashboardPage() {
+  const teamAnalytics = getTeamAnalytics();
+
   return (
-    <>
-      {/* 히어로 섹션 */}
-      <Section className="bg-gradient-to-b from-background to-muted/30">
-        <Container>
-          <div className="flex flex-col items-center text-center">
-            <Badge variant="secondary" className="mb-4">
-              Next.js 16 + React 19
-            </Badge>
-            <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              모던 웹 개발을 위한
-              <br />
-              <span className="text-primary">스타터킷</span>
-            </h1>
-            <p className="mb-8 max-w-2xl text-lg text-muted-foreground">
-              {siteConfig.description}
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Button size="lg" asChild>
-                <Link href="/demo">
-                  컴포넌트 데모 보기
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link
-                  href={siteConfig.links?.github ?? "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* 기능 섹션 */}
+    <Container>
       <Section>
-        <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold">주요 기능</h2>
-            <p className="text-muted-foreground">
-              빠르고 효율적인 웹 개발을 위한 모든 것이 준비되어 있습니다.
+        <div className="space-y-8">
+          {/* 헤더 */}
+          <div>
+            <h1 className="text-4xl font-bold text-foreground">
+              대시보드
+            </h1>
+            <p className="mt-2 text-muted-foreground">
+              멋쟁이사자처럼 인턴들의 성장을 확인하고 관리하세요.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {features.map((feature) => (
-              <Card key={feature.title}>
-                <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <feature.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>{feature.title}</CardTitle>
-                  <CardDescription>{feature.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
-      {/* 기술 스택 섹션 */}
-      <Section className="bg-muted/30">
-        <Container>
-          <div className="text-center">
-            <h2 className="mb-4 text-3xl font-bold">기술 스택</h2>
-            <div className="flex flex-wrap justify-center gap-2">
-              {[
-                "Next.js 16",
-                "React 19",
-                "TypeScript",
-                "Tailwind CSS v4",
-                "shadcn/ui",
-                "Zustand",
-                "React Hook Form",
-                "Zod",
-              ].map((tech) => (
-                <Badge key={tech} variant="outline" className="px-3 py-1">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
+          {/* 팀 KPI 통계 */}
+          <div className="grid gap-4 md:grid-cols-3">
+            <StatsCard
+              title="전체 인턴"
+              value={teamAnalytics.totalInterns}
+              description="현재 활동 중인 인턴 수"
+              icon={Users}
+            />
+            <StatsCard
+              title="평균 점수"
+              value={teamAnalytics.averageScore}
+              description="전체 인턴 평균 역량 점수"
+              icon={Award}
+              change={teamAnalytics.weeklyGrowthRate}
+              trend="up"
+            />
+            <StatsCard
+              title="주간 성장률"
+              value={`+${teamAnalytics.weeklyGrowthRate}%`}
+              description="지난 주 대비 성장률"
+              icon={TrendingUp}
+              change={2.1}
+              trend="up"
+            />
           </div>
-        </Container>
+
+          {/* 인턴 카드 그리드 */}
+          <div>
+            <h2 className="mb-4 text-2xl font-semibold">인턴 목록</h2>
+            <InternGrid interns={mockInterns} />
+          </div>
+        </div>
       </Section>
-    </>
+    </Container>
   );
 }
