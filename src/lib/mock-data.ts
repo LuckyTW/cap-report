@@ -71,10 +71,10 @@ export const SKILL_CATEGORIES: SkillCategoryMeta[] = [
  * 직무 메타데이터
  */
 export const POSITIONS: PositionMeta[] = [
-  { key: "frontend", name: "프론트엔드", color: "bg-blue-200" },
-  { key: "backend", name: "백엔드", color: "bg-green-200" },
-  { key: "designer", name: "디자이너", color: "bg-purple-200" },
-  { key: "pm", name: "PM", color: "bg-orange-200" },
+  { key: "frontend", name: "프론트엔드", color: "bg-orange-100 text-orange-700" },
+  { key: "backend", name: "백엔드", color: "bg-orange-100 text-orange-700" },
+  { key: "designer", name: "디자이너", color: "bg-orange-100 text-orange-700" },
+  { key: "pm", name: "PM", color: "bg-orange-100 text-orange-700" },
 ];
 
 /**
