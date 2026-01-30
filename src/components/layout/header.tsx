@@ -20,9 +20,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
       <Container>
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-24 items-center justify-between">
           {/* 로고 */}
-          <Logo />
+          <Logo size="5xl" />
 
           {/* 데스크탑 네비게이션 */}
           <nav className="hidden items-center gap-6 md:flex">

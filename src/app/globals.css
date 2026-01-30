@@ -79,6 +79,27 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* 멋쟁이사자처럼 브랜드 컬러 */
+  --likelion-primary: oklch(0.65 0.22 41.12); /* #FF7A00 주황색 */
+  --likelion-secondary: oklch(0.75 0.18 45); /* 밝은 주황 */
+  --likelion-accent: oklch(0.55 0.25 38); /* 진한 주황 */
+
+  /* 역량별 차트 색상 (8개) */
+  --skill-technical: oklch(0.55 0.25 264); /* 보라 - 기술 스킬 */
+  --skill-project: oklch(0.60 0.20 162); /* 청록 - 프로젝트 수행 */
+  --skill-collaboration: oklch(0.70 0.19 84); /* 연두 - 협업 */
+  --skill-communication: oklch(0.63 0.27 303); /* 핑크 - 커뮤니케이션 */
+  --skill-problem: oklch(0.65 0.22 41); /* 주황 - 문제 해결 */
+  --skill-learning: oklch(0.70 0.15 200); /* 하늘 - 학습 능력 */
+  --skill-creativity: oklch(0.65 0.25 16); /* 빨강 - 창의성 */
+  --skill-professional: oklch(0.50 0.15 240); /* 남색 - 전문성 */
+
+  /* 배지 등급별 색상 */
+  --badge-common: oklch(0.65 0.05 240); /* 회색 */
+  --badge-rare: oklch(0.60 0.20 162); /* 청록 */
+  --badge-epic: oklch(0.63 0.27 303); /* 보라 */
+  --badge-legendary: oklch(0.75 0.25 60); /* 금색 */
 }
 
 .dark {
@@ -113,6 +134,11 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* 다크 모드에서도 브랜드 컬러 유지 (명도만 조정) */
+  --likelion-primary: oklch(0.70 0.22 41.12);
+  --likelion-secondary: oklch(0.80 0.18 45);
+  --likelion-accent: oklch(0.60 0.25 38);
 }
 
 @layer base {
@@ -121,5 +147,46 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Glow 효과 */
+  .text-shadow-glow {
+    text-shadow: 0 0 20px hsl(var(--likelion-primary) / 0.5),
+                 0 0 40px hsl(var(--likelion-primary) / 0.3);
+  }
+
+  /* Stagger 애니메이션 */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+}
+
+/* 접근성: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -2,16 +2,16 @@ import type { SiteConfig, NavConfig, FooterLinkGroup } from "@/types";
 
 /**
  * 사이트 기본 설정
- * 프로젝트에 맞게 수정하세요.
+ * 멋쟁이사자처럼 인턴 역량 리포트 시스템
  */
 export const siteConfig: SiteConfig = {
-  name: "Next.js Starter",
-  description: "Next.js 16 + React 19 + TypeScript + Tailwind CSS v4 기반 모던 웹 스타터킷",
-  url: "https://example.com",
-  ogImage: "https://example.com/og.jpg",
+  name: "멋쟁이사자처럼 역량 성장 리포트",
+  description: "인턴의 역량 성장을 측정하고 트래킹하는 멋쟁이사자처럼 인턴 역량 리포트 시스템",
+  url: "https://likelion.net",
+  ogImage: "https://likelion.net/og.jpg",
   links: {
-    github: "https://github.com",
-    twitter: "https://twitter.com",
+    github: "https://github.com/likelion",
+    twitter: "https://twitter.com/likelion",
   },
 };
 
@@ -19,16 +19,7 @@ export const siteConfig: SiteConfig = {
  * 네비게이션 설정
  */
 export const navConfig: NavConfig = {
-  mainNav: [
-    {
-      title: "홈",
-      href: "/",
-    },
-    {
-      title: "데모",
-      href: "/demo",
-    },
-  ],
+  mainNav: [],
 };
 
 /**
@@ -36,24 +27,24 @@ export const navConfig: NavConfig = {
  */
 export const footerLinks: FooterLinkGroup[] = [
   {
-    title: "제품",
+    title: "멋쟁이사자처럼",
     links: [
-      { title: "기능", href: "#" },
-      { title: "가격", href: "#" },
+      { title: "소개", href: "https://likelion.net/about" },
+      { title: "프로그램", href: "https://likelion.net/programs" },
     ],
   },
   {
     title: "리소스",
     links: [
-      { title: "문서", href: "#" },
-      { title: "가이드", href: "#" },
+      { title: "블로그", href: "https://likelion.net/blog" },
+      { title: "커뮤니티", href: "https://likelion.net/community" },
     ],
   },
   {
-    title: "회사",
+    title: "지원",
     links: [
-      { title: "소개", href: "#" },
-      { title: "블로그", href: "#" },
+      { title: "FAQ", href: "#" },
+      { title: "문의하기", href: "#" },
     ],
   },
   {
